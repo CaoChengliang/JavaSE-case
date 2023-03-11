@@ -14,7 +14,10 @@ public class ShoppingCart {
 		
 	}
 	
-	public void addGoods() { //添加购物车
+	public void addGoods() { 
+		//添加购物车//目的是展示面向对象所以强制第一个添加的货物编码为1第二个为2...，和购物车
+		//list的数组标号统一起来方便修改函数的调用。但也可以不
+		//用这样，随便输入任何商品id，只需再需要编码的方法内修改即可，可以利用反射等。
 		
 		Goods goods = new Goods();
 	 
