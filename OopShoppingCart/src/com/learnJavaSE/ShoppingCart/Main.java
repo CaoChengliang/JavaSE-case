@@ -1,5 +1,7 @@
 package com.learnJavaSE.ShoppingCart;
-  
+
+import java.util.*;
+
 public class Main {
 	/* 需求 
 	 *   模拟购物车模块的功能，需要实现添加商品到购物车中去，同时需要提供修改商品的购买数量，
@@ -26,11 +28,46 @@ public class Main {
 	 *   结算价格 pay：
 	 *   请选择您要操作的功能：
 	 * 分析：
-	 *   需要有商品类、购物车类（包括商品数组）、用户显示界面,完成用户操作
+	 *   需要有商品类、购物车类（包括商品数组）、用户显示界面,完成用户操作。支付后完成购物车浏览。
 	 * */
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		//List<Goods> list = new ArrayList<>();
+		ShoppingCart scart = new ShoppingCart(); //设置购物车对象
+		
+		Scanner sc = new Scanner(System.in);
+		
+		while(true) {
+			
+			System.out.println("添加商品 add：");
+			System.out.println("查看商品 query：");
+			System.out.println("修改数量 update：");
+			System.out.println("结算价格 pay：");
+			System.out.println("请选择您的操作");
+			String command = sc.next();
+			
+			switch(command) {
+			
+			      case "add":
+			    	  scart.addGoods();
+			    	  break;
+			      case "query":
+			    	  scart.printGoods();
+			    	  break;
+			      case "update":
+			    	  scart.updateGoods();
+			    	  break;
+			      case "pay":
+			    	  scart.payGoods();
+			    	  break;
+			
+			}
+			if(command.equals("pay")) {//支付后退出
+				break;
+			}
+			
+		}
 
 	}
 
