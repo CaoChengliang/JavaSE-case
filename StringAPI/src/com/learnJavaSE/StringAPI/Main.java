@@ -9,7 +9,8 @@ public class Main {
 	 *  1. 验证码： 创建一个 5位数验证码。方法：创建一个String变量存储0-9\A-Z\a-z,产生一个随机数利用随机数获取String变量中的字符
 	 *  2. 模拟登陆： 模拟判断登陆是否成功。 方法：存储一个用户密码对，然后用户输入判断是否匹配。
 	 *  3. 号码隐藏： 隐藏一个号码的中间四位。 方法：截取号码中间字符串然后用****替换。
-	 * 
+	 *   
+	 *   
 	 * */
 
 	public static void main(String[] args) {
@@ -56,7 +57,7 @@ public class Main {
 			String pass = sc.next();
 			
 			if(okLoginName.equals(name)) {
-				if(okPassword.equals(pass)) {//引用类型比较用equals,不能用==
+				if(okPassword.equals(pass)) {//引用类型比较用equals,不能用==,  .equalsIgnoreCase()忽略大小写的比较
 					System.out.println("恭喜您登陆成功");
 					break;
 				}else {
