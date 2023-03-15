@@ -88,9 +88,24 @@ public class GamePanel {
 		
 		//每个人的从小到大排序
 		
-		Collections.sort(xiaocao);
-		Collections.sort(xiaoli);
-		Collections.sort(xiaolu);
+		Collections.sort(xiaocao, (Card c1, Card c2) -> 
+		
+		    { 
+				
+				if(c1.getIndex() == c2.getIndex()) {
+					
+					return 0;
+					
+				}
+				
+				return c1.getIndex() > c2.getIndex() ? 1:-1 ;
+				
+			}
+			
+			
+		);
+		//Collections.sort(xiaoli);
+		//Collections.sort(xiaolu);
 		//最后三张牌
 		List<Card> lastthreeCard = allCards.subList(allCards.size()-3 , allCards.size() );
 		
@@ -102,7 +117,7 @@ public class GamePanel {
 		for (Card card : lastthreeCard) {
 			xiaocao.add(card);
 		}
-		Collections.sort(xiaocao);
+		//.sort(xiaocao);
 		System.out.println("xiaocao"+xiaocao);
 		System.out.println("xiaoli"+xiaoli);
 		System.out.println("xiaolu"+xiaolu);

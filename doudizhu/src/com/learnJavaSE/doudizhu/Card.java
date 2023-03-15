@@ -1,6 +1,10 @@
 package com.learnJavaSE.doudizhu;
 
-public class Card implements Comparable{
+/**
+ * @author alan
+ *
+ */
+public class Card{
 	
 	private String size;//点数
 	private String color;//花色
@@ -48,18 +52,18 @@ public class Card implements Comparable{
 				
 	}
 	
-	@Override
-	public int compareTo( Object o ) {
-		
-		Card c = (Card) o;
-		
-		if(this.index == c.index) {
-			return 0;
-		}
-		
-		return this.index > c.index ? 1:-1;
-		
-	}
+//	@Override
+//	public int compareTo( Object o ) {
+//		
+//		Card c = (Card) o;
+//		
+//		if(this.index == c.index) {
+//			return 0;
+//		}
+//		
+//		return this.index > c.index ? 1:-1;
+//		
+//	}
 	
 	
 	
