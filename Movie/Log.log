@@ -1,18 +1,1 @@
-2023-03-18 18:42:57.290 [main] INFO  MovieSystem.class-包租公登陆成功~~~
-2023-03-18 18:43:05.142 [main] INFO  MovieSystem.class-包租公 店家正在查看自己的信息~~~~~~~
-2023-03-18 18:45:11.419 [main] INFO  MovieSystem.class-包租公登陆成功~~~
-2023-03-18 18:45:20.520 [main] INFO  MovieSystem.class-包租公 店家正在查看自己的信息~~~~~~~
-2023-03-18 18:46:05.552 [main] INFO  MovieSystem.class-包租公 店家正在查看自己的信息~~~~~~~
-2023-03-18 19:23:25.080 [main] INFO  MovieSystem.class-包租公登陆成功~~~
-2023-03-18 19:24:11.424 [main] INFO  MovieSystem.class-包租公 店家正在查看自己的信息~~~~~~~
-2023-03-18 19:26:21.699 [main] INFO  MovieSystem.class-包租公 店家正在查看自己的信息~~~~~~~
-2023-03-18 19:27:11.504 [main] ERROR MovieSystem.class-您的时间格式有问题
-java.text.ParseException: Unparseable date: "dadada"
-	at java.base/java.text.DateFormat.parse(DateFormat.java:399)
-	at com.learnJavaSE.Run.MovieSystem.updateMovie(MovieSystem.java:320)
-	at com.learnJavaSE.Run.MovieSystem.ShowBusinessMain(MovieSystem.java:243)
-	at com.learnJavaSE.Run.MovieSystem.login(MovieSystem.java:191)
-	at com.learnJavaSE.Run.MovieSystem.showMain(MovieSystem.java:140)
-	at com.learnJavaSE.Run.MovieSystem.main(MovieSystem.java:113)
-2023-03-18 19:28:06.268 [main] INFO  MovieSystem.class-包租公 店家正在查看自己的信息~~~~~~~
-2023-03-18 19:28:17.271 [main] INFO  MovieSystem.class-包租公 店家正在查看自己的信息~~~~~~~
+2023-03-19 16:16:02.553 [main] INFO  MovieSystem.class-关之琳登陆成功~~~

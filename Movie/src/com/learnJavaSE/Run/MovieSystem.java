@@ -497,7 +497,9 @@ public class MovieSystem {
 		// TODO Auto-generated method stub
 		
 		System.out.println("===============电影客户界面===============");
+		
 		System.out.println("欢迎您！"+ loginUser.getUserName() + (loginUser.getSex()=='男'?"先生":"女士"+"欢迎您进入系统"));
+		while (true) {
         System.out.println("请您选择要操作的功能");
         System.out.println("1、展示全部影片信息");
         System.out.println("2、根据电影名查询电影信息");
@@ -505,13 +507,14 @@ public class MovieSystem {
         System.out.println("4、购票功能");
         System.out.println("5、退出系统");
  
-        while (true) {
+        
             System.out.print("请您选择要操作的命令：");
             String  command = SYS_SC.nextLine();
             switch (command){
                 case "1":
                     // 展示全部影片
-             //       showAllMovies();
+             
+                	showAllMovies();
                     break;
                 case "2":
                     //根据电影名查询电影信息
@@ -522,7 +525,7 @@ public class MovieSystem {
                     break;
                 case "4":
                     // 购票功能
-           //         buyMovie();
+                    buyMovie();
                     break;
                 case "5":
                     System.out.println(loginUser.getUserName() + "已退出，欢迎下次再来~~~");
@@ -537,6 +540,126 @@ public class MovieSystem {
 	}
 
 	
+	/**
+	 * 
+	 * 
+	 * 购票功能
+	 */
+	private static void buyMovie() {
+		// TODO Auto-generated method stub
+		showAllMovies();
+		System.out.println("===============用户电影购票页面===============");
+		
+		while(true) {
+			
+			System.out.println("请输入购票商家名称");
+			String shopName = SYS_SC.nextLine(); //输入店铺名称
+			
+			Business business = getBusinessByShopName(shopName);
+			
+			if(business != null) {
+				//开始购票
+				List<Movie> movies = ALL_MOVIES.get(business);
+				
+				if( movies .size() > 0 ) {
+					//有电影
+					System.out.println("请您输入您想看的电影名称");
+					String MovieName = SYS_SC.nextLine();
+					
+					Movie movie = getMovieByShopAndName(business, MovieName);
+					
+					
+				}else {
+					
+					System.out.println("影院关门了~~~~~");
+					System.out.println("请问您是否继续 y/n");
+					String command = SYS_SC.nextLine();
+					switch(command) {
+						case "y":
+							break;
+					    default:
+					    	System.out.println("好的");
+					    	return;
+					}
+					
+				}
+				
+			}else {
+				
+				System.out.println("您输入的店铺名有误，请重新输入");
+				
+			}
+			
+		}
+		
+	}
+
+	private static Movie getMovieByShopAndName(Business business, String movieName) {
+
+		List<Movie> movies = ALL_MOVIES.get(business);
+		for(Movie movie:movies) {
+			
+			if(movie.getName().contains(movieName)) {
+				
+				return movie;
+				
+			}
+			
+		}
+		return null;
+	}
+
+	/**
+	 * 
+	 * 根据店铺名返回店铺对象
+	 * @param shopName
+	 * @return
+	 */
+	private static Business getBusinessByShopName(String shopName) {
+		// TODO Auto-generated method stub
+		Set<Business> businesses = ALL_MOVIES.keySet();
+		for(Business business: businesses) {
+			
+			if(business.getShopName().contains(shopName)) {
+				
+				return business;
+				
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * 
+	 * 展示全部商家和排片信息
+	 */
+	private static void showAllMovies() {
+		System.out.println("===============电影展示页面===============");
+		
+		// TODO Auto-generated method stub
+		ALL_MOVIES.forEach((business, movies) -> {
+			
+			System.out.println(business.getShopName() + "\t\t电话：" + business.getPhone() + "\t\t地址：" + business.getAddress());
+			//List<Movie> Movies = ALL_MOVIES.get(business);
+			System.out.println("\t\t\t"+"片名\t\t\t主演\t\t时长\t\t评分\t\t票价\t\t余票数量\t\t放映时间");
+			if(movies.size() > 0) {
+				
+				for(Movie m: movies) {
+					
+					System.out.println(m.getName() + "\t\t\t" + m.getActor() + "\t\t" + m.getTime() + "\t\t" +m.getScore() + "\t\t" +m.getPrice() + "\t\t" +m.getNumber()+"\t\t" + sdf.format(m.getStartTime()));
+					
+				}
+				
+			}else {
+				
+				System.out.println("您无片可播~~~~~~~~");
+				
+			}
+			
+		});
+		
+	}
+
 	/**
 	 * 根据登陆名找到用户
 	 */
