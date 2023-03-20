@@ -26,7 +26,7 @@ public class Movie {
 //		this.score = score;  评分由客户来打
 		this.time = time;
 		this.price = price;
-		this.number = number;
+		this.number = number;//票数
 		this.startTime = startTime;
 	}
 	public String getName() {

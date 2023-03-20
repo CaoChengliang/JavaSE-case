@@ -2,6 +2,7 @@ package com.learnJavaSE.Run;
 
 import com.learnJavaSE.bean.*;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -142,9 +143,11 @@ public class MovieSystem {
 					break;
 					
 				case "2":
+					CustomerRegister();
 					break;
 					
 				case "3":
+					BusinessRegister();
 					break;
 					
 				default:
@@ -158,6 +161,154 @@ public class MovieSystem {
 	}
     
 	
+	/**
+	 * 商家注册模块
+	 */
+	private static void BusinessRegister() {
+		// TODO Auto-generated method stub
+		System.out.println("=================商家注册模块==================");
+		
+		Business business = new Business();
+		
+		System.out.println("请输入您的账户姓名");
+		String LoginName = SYS_SC.nextLine();
+		business.setLoginName(LoginName);
+		
+		System.out.println("请输入您的真实姓名");
+		String Name = SYS_SC.nextLine();
+		business.setUserName(Name);
+		
+		//输入密码
+		System.out.println("请输入您的密码：");
+		String Password = SYS_SC.nextLine();
+		
+		while(true){
+			System.out.println("请再次输入您的密码：");
+			String okPassword = SYS_SC.nextLine();
+			
+			if(okPassword.equals(Password)) {
+				
+				business.setPassword(okPassword);
+				break;
+				
+			}else {
+				System.out.println("您输入的密码不正确");
+			}
+		}
+		
+		System.out.println("请输入您的性别：男/女");
+		String sex = SYS_SC.nextLine();
+		business.setSex(sex.charAt(0));
+		
+		System.out.println("请输入您的电话号码");
+		String phone = SYS_SC.nextLine();
+		business.setPhone(phone);
+		
+		System.out.println("请输入您的店铺地址");
+		String address = SYS_SC.nextLine();
+		business.setAddress(address);
+		
+		System.out.println("请输入您的店铺名称");
+		String shopName = SYS_SC.nextLine();
+		business.setShopName(shopName);
+		
+		
+		while(true) {
+			
+			try {
+				
+				System.out.println("请输入您的充值金额");
+				String money = SYS_SC.nextLine();
+				business.setMoney(Double.valueOf(money));
+				
+				
+				
+				ALL_USERS.add(business);
+				
+				ALL_MOVIES.put(business, new ArrayList<Movie>());
+				System.out.println("恭喜您！ "+ business.getUserName()+" "+sex+"士 注册成功");
+				return;
+				
+			}catch(Exception e){
+				LOGGER.error(business.getUserName() +"输入的金额有误");
+				System.out.println("您输入的金额有误，请重新输入");
+				
+			}
+			
+		}
+		
+	}
+
+	/**
+	 * 
+	 */
+	private static void CustomerRegister() {
+		// TODO Auto-generated method stub
+		System.out.println("=================用户注册模块==================");
+		
+		User Customer = new Customer();
+		
+		System.out.println("请输入您的账户姓名");
+		String LoginName = SYS_SC.nextLine();
+		Customer.setLoginName(LoginName);
+		
+		System.out.println("请输入您的真实姓名");
+		String Name = SYS_SC.nextLine();
+		Customer.setUserName(Name);
+		
+		//输入密码
+		System.out.println("请输入您的密码：");
+		String Password = SYS_SC.nextLine();
+		
+		while(true){
+			System.out.println("请再次输入您的密码：");
+			String okPassword = SYS_SC.nextLine();
+			
+			if(okPassword.equals(Password)) {
+				
+				Customer.setPassword(okPassword);
+				break;
+				
+			}else {
+				System.out.println("您输入的密码不正确");
+			}
+		}
+		
+		System.out.println("请输入您的性别：男/女");
+		String sex = SYS_SC.nextLine();
+		Customer.setSex(sex.charAt(0));
+		
+		System.out.println("请输入您的电话号码");
+		String phone = SYS_SC.nextLine();
+		Customer.setPhone(phone);
+		
+		
+		while(true) {
+			
+			try {
+				
+				System.out.println("请输入您的充值金额");
+				String money = SYS_SC.nextLine();
+				Customer.setMoney(Double.valueOf(money));
+				ALL_USERS.add(Customer);
+				System.out.println("恭喜您！ "+ Customer.getUserName()+" "+sex+"士 注册成功");
+				return;
+				
+			}catch(Exception e){
+				LOGGER.error(Customer.getUserName() +"输入的金额有误");
+				System.out.println("您输入的金额有误，请重新输入");
+				
+			}
+			
+		}
+
+		
+		
+		
+		
+		
+	}
+
 	/**
 	 * 登陆模块
 	 */
@@ -498,7 +649,7 @@ public class MovieSystem {
 		
 		System.out.println("===============电影客户界面===============");
 		
-		System.out.println("欢迎您！"+ loginUser.getUserName() + (loginUser.getSex()=='男'?"先生":"女士"+"欢迎您进入系统"));
+		System.out.println("欢迎您！"+ loginUser.getUserName() + (loginUser.getSex()=='男'?"先生":"女士"+"欢迎您进入系统")+"您的余额为:"+loginUser.getMoney());
 		while (true) {
         System.out.println("请您选择要操作的功能");
         System.out.println("1、展示全部影片信息");
@@ -518,10 +669,10 @@ public class MovieSystem {
                     break;
                 case "2":
                     //根据电影名查询电影信息
-             //       selectedMovieByName();
+                    selectedMovieByName();
                     break;
                 case "3":
-           //         score();
+                     score();
                     break;
                 case "4":
                     // 购票功能
@@ -540,6 +691,124 @@ public class MovieSystem {
 	}
 
 	
+
+
+	/**
+	 * 根据电影名查询电影信息
+	 */
+	private static void selectedMovieByName() {
+		// TODO Auto-generated method stub
+		showAllMovies();
+		System.out.println("===============用户电影查询页面===============");
+		while(true) {
+			
+			System.out.println("请输入您想要查询的电影：");
+			String movieName = SYS_SC.nextLine();
+			
+			Movie m = getMoiveByMovieName(movieName);			
+			
+			if(m != null) {
+				//开始查看
+				System.out.println("\t\t\t"+"片名\t\t\t主演\t\t时长\t\t评分\t\t票价\t\t余票数量\t\t放映时间");
+				System.out.println(m.getName() + "\t\t\t" + m.getActor() + "\t\t" + m.getTime() + "\t\t" +m.getScore() + "\t\t" +m.getPrice() + "\t\t" +m.getNumber()+"\t\t" + sdf.format(m.getStartTime()));
+			    return;//此处要增加商家信息，时间有限以后再回来添加
+				
+				
+			}else {
+				
+				System.out.println("对不起，输入的电影名称有误");
+				System.out.println("请问您是否继续 y/n  ");
+				String command = SYS_SC.nextLine();
+				switch(command) {
+					case "y":
+						break;
+				    default:
+				    	System.out.println("好的");
+				    	return;
+				}
+				
+			}
+			
+		}
+		
+		
+		
+	}
+
+	/**
+	 * 评分功能的实现
+	 */
+	private static void score() {
+		showAllMovies();
+		System.out.println("===============用户电影评分页面===============");
+		while(true) {
+	
+			System.out.println("请输入您想要评分的电影：");
+			String movieName = SYS_SC.nextLine();
+			
+			Movie movie = getMoiveByMovieName(movieName);			
+			
+			if(movie != null) {
+				//开始评分
+				while(true) {
+					
+					System.out.println("请输入您对于电影《 "+ movie.getName() +"》 的评分！");
+					double score = SYS_SC.nextDouble();
+					
+					if(score < 0) {
+						
+						System.out.println("您输入的数字违法（不能小于0）！请重新输入");
+						
+						
+					}else {
+						
+						movie.setScore(score);
+						System.out.println("恭喜您评价成功，谢谢您的参与~~~~~~~~~");
+						return;
+						
+					}
+					
+				}
+				
+				
+			}else {
+				
+				System.out.println("对不起，输入的电影名称有误");
+				System.out.println("请问您是否继续 y/n  ");
+				String command = SYS_SC.nextLine();
+				switch(command) {
+					case "y":
+						break;
+				    default:
+				    	System.out.println("好的");
+				    	return;
+				}
+				
+			}
+			
+		}
+		
+	}
+	
+	//根据电影名找到电影，客户寻找
+	private static Movie getMoiveByMovieName(String movieName) {
+		Set<Business> businesses = ALL_MOVIES.keySet();
+		for(Business business: businesses) {
+			
+			List<Movie> movies = ALL_MOVIES.get(business);
+			for(Movie movie: movies) {
+				
+				if(movie.getName().contains(movieName)) {
+					
+					return movie;
+				}
+				
+			}
+			
+		}
+		return null;
+	}
+
 	/**
 	 * 
 	 * 
@@ -563,10 +832,73 @@ public class MovieSystem {
 				
 				if( movies .size() > 0 ) {
 					//有电影
-					System.out.println("请您输入您想看的电影名称");
-					String MovieName = SYS_SC.nextLine();
-					
-					Movie movie = getMovieByShopAndName(business, MovieName);
+					while(true) {
+						
+						System.out.println("请您输入您想看的电影名称");
+						String MovieName = SYS_SC.nextLine();
+						
+						Movie movie = getMovieByShopAndName(business, MovieName);
+						
+						if(movie != null) {
+							//开始购票
+							System.out.println("请输入您想要购买的票数！ 现存余票为：" + movie.getNumber());
+							String number = SYS_SC.nextLine();
+							
+							int buyNumber = Integer.valueOf(number);
+							
+							if(buyNumber > movie.getNumber()) {
+								
+								System.out.println("对不起，余票不足");
+								System.out.println("请问您是否继续 y/n 现存余票为 "+ movie.getNumber());
+								String command = SYS_SC.nextLine();
+								switch(command) {
+									case "y":
+										break;
+								    default:
+								    	System.out.println("好的");
+								    	return;
+								}
+								
+							}else {
+								
+								//算钱
+								double money = BigDecimal.valueOf(buyNumber).multiply(BigDecimal.valueOf(movie.getPrice())).doubleValue();
+								
+								if(loginUser.getMoney() >= money) {
+									//钱够了可以买了
+									
+									loginUser.setMoney(loginUser.getMoney() - money);
+									business.setMoney(business.getMoney() - money);
+									movie.setNumber(movie.getNumber() - buyNumber);
+									
+									System.out.println("您已成功购买电影《 "+ movie.getName()+" 》 票数为： "+ buyNumber);
+									return;
+									
+									
+								}else {
+									System.out.println("对不起您余额不足！");
+									System.out.println("请问您是否继续 y/n");
+									String command = SYS_SC.nextLine();
+									switch(command) {
+										case "y":
+											break;
+									    default:
+									    	System.out.println("好的");
+									    	return;
+									
+								}
+								
+								}
+								
+							}
+							
+						}else {
+							
+							System.out.println("电影名称有误~~~~~~~");
+							
+						}
+						
+					}
 					
 					
 				}else {
