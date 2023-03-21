@@ -1,4 +1,4 @@
-牛package com.learnJavaSE.outputstream;
+package com.learnJavaSE.outputstream;
 
 import java.io.*;
 
