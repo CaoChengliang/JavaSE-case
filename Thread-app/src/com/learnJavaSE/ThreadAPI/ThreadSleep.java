@@ -10,7 +10,7 @@ public class ThreadSleep {
 			System.out.println("main线程在运行"+i);
 			
 			if(i == 3) {
-				
+				//睡眠3s
 				Thread.sleep(3000);
 				
 			}
